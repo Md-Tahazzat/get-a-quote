@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::-webkit-scrollbar {
+  width: 1px;
+}
+
+
+.each-type{
+  position: relative;
+  padding-left: 24px;
+}
+.each-type::before {
+  position: absolute;
+  content: "";
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  width: 16px;
+  height: 16px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100% 100%;
+  background-image: url(/svgs/pricing/check.svg);
+}
+
+.each-type.disabled{
+  opacity: 0.5;
+}

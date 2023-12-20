@@ -1,0 +1,7 @@
+.accordion__item{
+   background-color: rgba(240, 248, 255, 0.664);
+   color:black
+}
+.accordion__heading{
+  font-weight: 700;
+}

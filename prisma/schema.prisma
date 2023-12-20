@@ -1,0 +1,168 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model HeroHome {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  title    String
+  subtitle String
+  section  String?
+  video    String?
+}
+
+model HeroAbout {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  title    String
+  subtitle String
+  image    String
+}
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  email     String   @unique
+  password  String
+  role      String   @default("USER")
+  createdAt DateTime @default(now())
+  blogs     Blog[]
+}
+
+// blog models
+model Blog {
+  id               String   @id @default(auto()) @map("_id") @db.ObjectId
+  content          String
+  title            String
+  themeImage       String
+  shortDescription String
+  tags             String[]
+  category         String
+  published        Boolean  @default(false)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  author           User     @relation(fields: [authorId], references: [id])
+  authorId         String   @db.ObjectId
+}
+
+model ImageUrl {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  url       String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Project {
+  id                   String  @id @default(auto()) @map("_id") @db.ObjectId
+  projectName          String
+  projectDescription   String?
+  clientDescription    String?
+  projectGoals         String?
+  projectProblem       String?
+  projectSolutions     String?
+  projectUrl           String?
+  projectOverviewVideo String?
+}
+model Service {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  badge     String
+  descriptions String
+  price     String
+  duration  String
+  serviceTypes ServiceType[]
+}
+
+type ServiceType {
+  type    String
+  status  String
+}
+
+model SatisfiedClient{
+  id   String  @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  image String
+}
+
+
+model CareerBenifit {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  title    String
+}
+model Job {
+  id               String   @id @default(auto()) @map("_id") @db.ObjectId
+  content          String
+  title            String
+  tags             String[]
+  category         String
+  published        Boolean  @default(false)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  
+}
+
+model AboutHero{
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  AboutTitle String
+  AboutSubtitle String
+  AboutImage String
+}
+
+model TeamMember {
+  id           String @id @default(auto()) @map("_id") @db.ObjectId
+  image        String
+  name         String
+  designation  String
+  socialLinks  SocialLinks[]
+}
+
+type SocialLinks {
+  icon         String
+  link         String
+}
+
+model Testimonial {
+   id   String  @id @default(auto()) @map("_id") @db.ObjectId
+   name String
+   image String
+   description String
+   rating String
+   designation String
+
+
+    
+}
+
+model Sponsor{
+  id   String  @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  image String
+}
+
+model Faq{
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  question String?
+  answer String?
+}
+
+
+model HomeService{
+   id String @id @default(auto()) @map("_id") @db.ObjectId
+   image String?
+    name String?
+}
+
+model Admin{
+   id String @id @default(auto()) @map("_id") @db.ObjectId
+   email String
+   password String
+}
+
+
+
