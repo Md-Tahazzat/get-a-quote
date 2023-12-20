@@ -15,7 +15,13 @@ const SubmitQuote = () => {
     uploadedImages,
     additionalComments,
   } = useQuotationContext();
+
+  // form submit handler.
   const handleSubmit = () => {
+    if (!contactInfo.email) {
+      return alert("please fill your contact information first.");
+    }
+
     setLoading(true);
     const data = {
       selectedServices,
@@ -30,13 +36,16 @@ const SubmitQuote = () => {
       .post(`${process.env.NEXT_PUBLIC_URL}/api/send-email`, data)
       .then((res) => {
         setLoading(false);
-        console.log(res);
+        alert(
+          "An email has been send to your accuont with details. We will contact you soon."
+        );
       })
       .catch((error) => {
         setLoading(false);
         console.log(error);
       });
   };
+
   return (
     <button
       onClick={handleSubmit}

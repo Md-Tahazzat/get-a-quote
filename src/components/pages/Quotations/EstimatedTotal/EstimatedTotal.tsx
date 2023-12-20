@@ -10,6 +10,7 @@ const EstimatedTotal = () => {
     currency,
     timeline,
     setTimeline,
+    uploadedImages,
   } = useQuotationContext();
 
   // calculate total
@@ -19,7 +20,7 @@ const EstimatedTotal = () => {
     const estimatedTimes = item.serviceLavel?.estimatedTimes;
     const extraCost =
       estimatedTimes[item.selectedTimeIndex]?.extraAmountInDollar;
-    const totalPrice = price + extraCost;
+    const totalPrice = (price + extraCost) * applicationAmount;
     estimatedPrice += totalPrice;
   });
 
@@ -39,8 +40,23 @@ const EstimatedTotal = () => {
   const handleForward = () => {
     const { activeLabelIndex, completeLabelIndex } = timeline;
     // TODO: Have to change the alert into some library message (like:toastify)
+    // forward functionality
+    /*
+     * Return conditions:
+     * if the user doesn't select any service and click to the ADD COMMENTS laebl return.
+     * if the user doesn't upload any images and click to CONTACT INFORMATION label return.
+     */
     if (!selectedServices && completeLabelIndex === 0) {
       return alert("please add a service first");
+    }
+
+    // alert user if the user doesn't select any time.
+    if (timeline.activeLabelIndex === 2 && completeLabelIndex === 1) {
+      alert("Default time selected");
+    }
+
+    if (!uploadedImages && completeLabelIndex === 2) {
+      return alert("Please upload a sample image");
     }
 
     setTimeline({
@@ -50,11 +66,6 @@ const EstimatedTotal = () => {
           ? completeLabelIndex + 1
           : completeLabelIndex,
     });
-  };
-
-  const handleSubmit = () => {
-    // TODO: have to implement mail sending option with proper info.
-    alert("email sendin in process");
   };
 
   return (

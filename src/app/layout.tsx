@@ -1,4 +1,7 @@
-import AuthProvider from "@/providers/authProvider";
+import NavSlider from "@/Shared/NavSlider/navSlider";
+import NavBar from "@/Shared/NaveBar/NavBar";
+import "@/css/style.css";
+import "@/css/tailwind/globals.css";
 import { Montserrat } from "next/font/google";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
@@ -18,7 +21,11 @@ const RootLayout = ({ children }: LayoutPropsType) => {
   return (
     <html lang="en" className="dark">
       <body className={`${montserrat.className} bg-white`}>
-        <AuthProvider>{children}</AuthProvider>
+        <main className="main-wrap">
+          <NavBar />
+          {children}
+          <NavSlider />
+        </main>
       </body>
     </html>
   );

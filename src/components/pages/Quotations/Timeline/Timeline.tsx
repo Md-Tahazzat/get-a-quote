@@ -25,15 +25,14 @@ const Timeline = () => {
     /*
      * Return conditions:
      * if the user doesn't select any service and click to the ADD COMMENTS laebl return.
-     * if the user doesn't select any working time and click to UPLOAD IMAGES label return.
      * if the user doesn't upload any images and click to CONTACT INFORMATION label return.
      */
     if (index === 2 && !selectedServices && completeLabelIndex === 0) {
       return alert("please add a service first");
     }
 
-    if (index === 3 && completeLabelIndex === 0) {
-      return alert("please add a comments first");
+    if (index === 3 && completeLabelIndex === 1) {
+      alert("Default time selected");
     }
 
     if (index === 4 && !uploadedImages && completeLabelIndex === 2) {
